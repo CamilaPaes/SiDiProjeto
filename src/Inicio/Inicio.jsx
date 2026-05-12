@@ -4,29 +4,41 @@ import { UserRound, UsersRound, UserCheck, Settings, ArrowRight } from "lucide-r
 import CardBeneficios from "./CardBeneficios"
 import AcessosPerfil from "./AcessosPerfil"
 import ListaEtapas from "./ListaEtapas"
-import BeneficiosVisit from "../Visitante/BeneficiosVisit";
-import PaginaVisitante from "../Visitante/PaginaVisitante";
+
+import "./css/Inicio.css"
 
 export default function Inicio() {
 
     return (
         <main>
 
-            <div>
+            <div className="hero">
                 <h1>Bem-vindo ao VisitControl</h1>
-                <p>Sistema inteligente de pré-cadastro de visitantes e fornecedores. Rápido, seguro e em conformidade com a LGPD.</p>
-                <Link to={"Formulario"}>
-                    <button type="button">Novo Pré-Cadastro</button>
+
+                <p>
+                    Sistema inteligente de pré-cadastro de visitantes e fornecedores.
+                    Rápido, seguro e em conformidade com a LGPD.
+                </p>
+
+                <Link to={"/DadosPessoais"}>
+                    <button type="button">
+                        Novo Pré-Cadastro
+                    </button>
                 </Link>
             </div>
 
-            <div>
+
+            <div className="titulo-secao">
                 <h2>Por que usar o VisitControl?</h2>
-                <p>Nossa plataforma oferece a melhor experiência em gestão de visitantes</p>
+
+                <p>
+                    Nossa plataforma oferece a melhor experiência em gestão de visitantes
+                </p>
             </div>
 
 
             <section className="caixas">
+
                 <CardBeneficios
                     icone={<Shield />}
                     titulo="Conformidade LGPD"
@@ -50,15 +62,18 @@ export default function Inicio() {
                     titulo="Processo Simplificado"
                     descricao="Cadastro rápido e intuitivo em poucos passos"
                 />
+
             </section>
 
-            <div>
+
+            <div className="titulo-secao">
                 <p>Acesso por perfil</p>
                 <h3>Selecione seu perfil de acesso</h3>
             </div>
 
 
-            <section>
+            <section className="perfis">
+
                 <AcessosPerfil
                     icone={<UserRound />}
                     perfil="Visitante"
@@ -66,13 +81,10 @@ export default function Inicio() {
                     to="/PaginaVisitante"
                 />
 
-
-
                 <AcessosPerfil
                     icone={<UsersRound />}
                     perfil="Colaborador"
                     seta={<ArrowRight size={18} />}
-
                 />
 
                 <AcessosPerfil
@@ -86,24 +98,28 @@ export default function Inicio() {
                     perfil="Administrador"
                     seta={<ArrowRight size={18} />}
                 />
+
             </section>
 
-            <p>Clique no perfil desejado para acessar o sistema com as permissões correspondentes</p>
+
+            <p className="texto-perfil">
+                Clique no perfil desejado para acessar o sistema com as permissões correspondentes
+            </p>
 
 
-
-            <div>
+            <div className="titulo-secao">
                 <h2>Como funciona</h2>
                 <p>Processo simples em 5 etapas</p>
             </div>
 
-            <section>
+
+            <section className="etapas-container">
+
                 <ListaEtapas
                     numero="01"
                     topico="Dados Pessoais"
                     descricao="Preencha suas informações básicas"
                 />
-
 
                 <ListaEtapas
                     numero="02"
@@ -128,18 +144,25 @@ export default function Inicio() {
                     topico="Revisão e Envio"
                     descricao="Revise e envie seu cadastro"
                 />
+
             </section>
 
 
-            <div>
+            <div className="cta-final">
+
                 <h2>Pronto para começar?</h2>
-                <p>Faça seu pré-cadastro agora e garanta um acesso rápido e seguro</p>
-                <Link to={"Formulario"}>
-                    <button type="button">Iniciar Pré-Cadastro</button>
+
+                <p>
+                    Faça seu pré-cadastro agora e garanta um acesso rápido e seguro
+                </p>
+
+                <Link to={"/DadosPessoais"}>
+                    <button type="button">
+                        Iniciar Pré-Cadastro
+                    </button>
                 </Link>
+
             </div>
-
-
 
         </main>
     )

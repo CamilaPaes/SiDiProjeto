@@ -1,17 +1,16 @@
 export default function ListaEtapas(props) {
     return (
         <div className="Etapas">
+
             <div className="numeros">
                 {props.numero}
             </div>
 
-            <p>
-                {props.topico}
-            </p>
+            <div className="etapa-texto">
+                <h4>{props.topico}</h4>
+                <p>{props.descricao}</p>
+            </div>
 
-            <p>
-                {props.descricao}
-            </p>
         </div>
     )
 }

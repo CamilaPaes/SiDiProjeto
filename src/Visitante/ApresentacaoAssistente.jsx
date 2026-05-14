@@ -20,7 +20,7 @@ export default function ApresentacaoAssistente() {
             <p>Dica: Você pode me acessar a qualquer momento pelo chat no canto da tela!</p>
 
 
-            <Link to={"/DadosPessoais"}>
+            <Link to={"/Formulario"}>
                 <button type="button">Vamos começar!</button>
             </Link>
 

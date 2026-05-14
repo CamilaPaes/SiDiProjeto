@@ -1,6 +1,7 @@
 import { useState } from "react" //Serve para guardar e atualizar os dados dentro do componetnte
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Stepper from "../components/Stepper";
 
 export default function DadosVisita() { //Criando componente chamado "DadosVisita" que é tipo uma função que retorna iterface HTML
     const navigate = useNavigate()
@@ -8,7 +9,7 @@ export default function DadosVisita() { //Criando componente chamado "DadosVisit
     const [dados, setDados] = useState({ //Criando o estado dos dados. 'dados -> valores atuais', setDados -> atualiza
         quemConvidou: "",
         setor: "",
-        qntdVisitantes: 0, // ✅ agora começa como número
+        qntdVisitantes: 0, // agora começa como número
         data: "",
         horario: "",
     });
@@ -26,7 +27,7 @@ export default function DadosVisita() { //Criando componente chamado "DadosVisit
         const nomeCampo = evento.target.name; //Pega QUAL campo foi alterado
         let valor = evento.target.value; //Pega O QUE o usuario digitou
 
-        // ✅ Se for número, converte
+        // Se for número, converte
         if (nomeCampo === "qntdVisitantes") {
             valor = Number(valor);
         }
@@ -61,7 +62,7 @@ export default function DadosVisita() { //Criando componente chamado "DadosVisit
             novosErros.setor = "Esse campo é obrigatório"
         }
 
-        if (!dados.qntdVisitantes || dados.qntdVisitantes <= 0) { // ✅ validação ajustada
+        if (!dados.qntdVisitantes || dados.qntdVisitantes <= 0) { //validação ajustada
             novosErros.qntdVisitantes = "Esse campo é obrigatório"
         }
 
@@ -86,6 +87,7 @@ export default function DadosVisita() { //Criando componente chamado "DadosVisit
         }
 
         //Só navega se estiver tudo certo
+        localStorage.setItem("dadosVisita", JSON.stringify(dados));
         navigate("/InformacoesAdicionais");
 
         setDados({
@@ -99,7 +101,7 @@ export default function DadosVisita() { //Criando componente chamado "DadosVisit
 
     return (
         <div>
-
+            <Stepper etapaAtual={2} />
             <div>
                 <h3>Dados da Visita</h3>
                 <p>Preencha as informações da visita</p>
@@ -157,7 +159,7 @@ export default function DadosVisita() { //Criando componente chamado "DadosVisit
                 />
                 {erro.horario && <p>{erro.horario}</p>}
 
-                <Link to={"/DadosPessoais"}>
+                <Link to={"/Formulario"}>
                     <button type="button">Anterior</button>
                 </Link>
 

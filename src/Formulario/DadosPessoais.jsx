@@ -1,6 +1,7 @@
 import { useState } from "react" //Serve para guardar e atualizar os dados dentro do componetnte
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Stepper from "../components/Stepper";
 
 export default function DadosPessoais() { //Criando componente chamado "DadosPessoais" que é tipo uma função que retorna iterface HTML
     const navigate = useNavigate()
@@ -10,7 +11,7 @@ export default function DadosPessoais() { //Criando componente chamado "DadosPes
         email: "",
         empresa: "",
         cpf: "",
-        telefone: "" //Novo campo telefone
+        telefone: ""
 
     });
 
@@ -19,7 +20,7 @@ export default function DadosPessoais() { //Criando componente chamado "DadosPes
         email: "",
         empresa: "",
         cpf: "",
-        telefone: "" //Novo campo telefone
+        telefone: ""
     })
 
 
@@ -40,7 +41,7 @@ export default function DadosPessoais() { //Criando componente chamado "DadosPes
     }
 
 
-    function enviarFormulario(evento) { //Executa quando clica em 'Enviar'
+    async function enviarFormulario(evento) { //Executa quando clica em 'Enviar'
         evento.preventDefault(); //Impede a página de recarregar
 
         let novosErros = { //Cria novos erros. Começa "zerado"
@@ -64,7 +65,7 @@ export default function DadosPessoais() { //Criando componente chamado "DadosPes
         }
 
         if (!dadosPessoais.cpf) { //Valida cpf
-            novosErros.cpf = "CPF é obrigatório"; //Corrigido
+            novosErros.cpf = "CPF é obrigatório";
         }
 
         if (!dadosPessoais.telefone) { //Valida telefone
@@ -77,10 +78,15 @@ export default function DadosPessoais() { //Criando componente chamado "DadosPes
             return; //Se qualquer campo tiver erro -> PARA aqui. Não envia.
         }
 
-        //Só navega se estiver tudo certo
-        navigate("/DadosVisita");
+        try {
+            localStorage.setItem("dadosPessoais", JSON.stringify(dadosPessoais));
+            navigate("/DadosVisita");
 
-        console.log(dadosPessoais); //Se passou na validação, mostra os dados no console
+        } catch (erro) {
+
+            console.error("Erro ao salvar usuário:", erro);
+
+        }
 
         setDadosPessoais({
             nome: "",
@@ -93,11 +99,11 @@ export default function DadosPessoais() { //Criando componente chamado "DadosPes
 
 
 
-    return ( //Aqui é o que aparece na tela
+    return (
 
 
         <div>
-
+            <Stepper etapaAtual={1} />
             <div>
                 <h3>Dados Pessoais</h3>
                 <p>Preencha suas informações</p>

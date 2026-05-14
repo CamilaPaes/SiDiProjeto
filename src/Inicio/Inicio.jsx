@@ -20,7 +20,7 @@ export default function Inicio() {
                     Rápido, seguro e em conformidade com a LGPD.
                 </p>
 
-                <Link to={"/DadosPessoais"}>
+                <Link to={"/Formulario"}>
                     <button type="button">
                         Novo Pré-Cadastro
                     </button>
@@ -156,7 +156,7 @@ export default function Inicio() {
                     Faça seu pré-cadastro agora e garanta um acesso rápido e seguro
                 </p>
 
-                <Link to={"/DadosPessoais"}>
+                <Link to={"/Formulario"}>
                     <button type="button">
                         Iniciar Pré-Cadastro
                     </button>

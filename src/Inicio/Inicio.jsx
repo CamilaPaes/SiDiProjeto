@@ -85,6 +85,7 @@ export default function Inicio() {
                     icone={<UsersRound />}
                     perfil="Colaborador"
                     seta={<ArrowRight size={18} />}
+                    to="/Colaborador"
                 />
 
                 <AcessosPerfil

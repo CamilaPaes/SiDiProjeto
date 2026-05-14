@@ -39,8 +39,7 @@ export default function Revisao() {
                 localStorage.removeItem("dadosPessoais");
                 localStorage.removeItem("dadosVisita");
                 localStorage.removeItem("informacoesAdicionais");
-
-                navigate("/ProximaPagina");
+                navigate("/");
             })
 
             .catch((erro) => {
@@ -67,7 +66,7 @@ export default function Revisao() {
 
             <div className="form-container">
 
-                {/* DADOS PESSOAIS */}
+
                 <div className="review-card">
 
                     <h2 className="review-title">
@@ -101,7 +100,7 @@ export default function Revisao() {
 
                 </div>
 
-                {/* DADOS VISITA */}
+
                 <div className="review-card">
 
                     <h2 className="review-title">
@@ -135,7 +134,7 @@ export default function Revisao() {
 
                 </div>
 
-                {/* INFORMAÇÕES ADICIONAIS */}
+
                 <div className="review-card">
 
                     <h2 className="review-title">

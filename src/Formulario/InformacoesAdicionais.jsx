@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import Stepper from "../components/Stepper";
+import "./styles/formulario.css";
+import "./styles/stepper.css";
 
 export default function InformacoesAdicionais() {
 
@@ -35,6 +36,7 @@ export default function InformacoesAdicionais() {
     }
 
     function enviarFormulario(evento) {
+
         evento.preventDefault();
 
         let novosErros = {
@@ -44,7 +46,9 @@ export default function InformacoesAdicionais() {
         };
 
         if (!informacoesAdicionais.tipoVisitante) {
-            novosErros.tipoVisitante = "Tipo de visitante é obrigatório";
+
+            novosErros.tipoVisitante =
+                "Tipo de visitante é obrigatório";
         }
 
         setErro(novosErros);
@@ -53,23 +57,12 @@ export default function InformacoesAdicionais() {
             return;
         }
 
-        const dadosPessoais = JSON.parse(localStorage.getItem("dadosPessoais"));
-        const dadosVisita = JSON.parse(localStorage.getItem("dadosVisita"));
+        localStorage.setItem(
+            "informacoesAdicionais",
+            JSON.stringify(informacoesAdicionais)
+        );
 
-        const payload = {
-            ...dadosPessoais,
-            ...dadosVisita,
-            ...informacoesAdicionais
-        };
-
-        axios.post("http://localhost:8080/cadastro-visitante", payload)
-            .then(res => {
-                console.log("Salvo com sucesso:", res.data);
-                navigate("/ProximaPagina");
-            })
-            .catch(err => {
-                console.log("Erro ao salvar:", err);
-            });
+        navigate("/Revisao");
 
         setInformacoesAdicionais({
             tipoVisitante: "",
@@ -79,22 +72,26 @@ export default function InformacoesAdicionais() {
     }
 
     return (
-        <div>
+        <div className="form-page">
             <Stepper etapaAtual={3} />
-            <div>
-                <h3>Informações Adicionais</h3>
-                <p>Complete com dados complementares</p>
+
+            <div className="form-header">
+                <h3 className="form-title">Informações Adicionais</h3>
+                <p className="form-subtitle">Complete com dados complementares</p>
             </div>
 
-            <div>
+            <div className="form-nav">
                 <Link to={"/"}>
-                    <button type="button">Voltar para Home</button>
+                    <button type="button" className="form-button form-button-secondary">
+                        Voltar para Home
+                    </button>
                 </Link>
             </div>
 
-            <form onSubmit={enviarFormulario}>
+            <form onSubmit={enviarFormulario} className="form-container">
 
                 <select
+                    className="form-input"
                     name="tipoVisitante"
                     value={informacoesAdicionais.tipoVisitante}
                     onChange={alterarValor}
@@ -106,9 +103,12 @@ export default function InformacoesAdicionais() {
                     <option value="entrevista">Entrevista</option>
                 </select>
 
-                {erros.tipoVisitante && <p>{erros.tipoVisitante}</p>}
+                {erros.tipoVisitante && (
+                    <p className="form-error">{erros.tipoVisitante}</p>
+                )}
 
                 <input
+                    className="form-input"
                     type="text"
                     name="placaVeiculo"
                     value={informacoesAdicionais.placaVeiculo}
@@ -116,9 +116,12 @@ export default function InformacoesAdicionais() {
                     placeholder="ABC-1234"
                 />
 
-                {erros.placaVeiculo && <p>{erros.placaVeiculo}</p>}
+                {erros.placaVeiculo && (
+                    <p className="form-error">{erros.placaVeiculo}</p>
+                )}
 
                 <input
+                    className="form-input"
                     type="text"
                     name="observacao"
                     value={informacoesAdicionais.observacao}
@@ -126,16 +129,30 @@ export default function InformacoesAdicionais() {
                     placeholder="Ex: necessidades especiais, materiais que trará"
                 />
 
-                {erros.observacao && <p>{erros.observacao}</p>}
+                {erros.observacao && (
+                    <p className="form-error">{erros.observacao}</p>
+                )}
 
-                <Link to={"/DadosVisita"}>
-                    <button type="button">Anterior</button>
-                </Link>
+                <div className="form-buttons">
 
-                <button type="submit">Próximo</button>
+                    <Link to={"/DadosVisita"}>
+                        <button
+                            type="button"
+                            className="form-button form-button-secondary"
+                        >
+                            Anterior
+                        </button>
+                    </Link>
 
+                    <button
+                        type="submit"
+                        className="form-button form-button-primary"
+                    >
+                        Próximo
+                    </button>
+
+                </div>
             </form>
-
         </div>
     );
 }

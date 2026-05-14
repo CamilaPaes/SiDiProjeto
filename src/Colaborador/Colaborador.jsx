@@ -42,21 +42,13 @@ export default function Colaborador() {
     return (
         <div>
             <div>
-
                 <h2>Painel do Colaborador</h2>
-
                 <p>Gerencie os cadastros vinculados ao seu nome</p>
-
             </div>
-
             <div>
-
                 <h4>Você tem 3 cadastros pendentes de aprovação</h4>
-
                 <p>Revise e aprove os cadastros para liberar o acesso dos visitantes</p>
-
             </div>
-
             <TabelaSolicitacao requests={requests} />
         </div>
 

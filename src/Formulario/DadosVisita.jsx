@@ -1,80 +1,66 @@
-import { useState } from "react" //Serve para guardar e atualizar os dados dentro do componetnte
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Stepper from "../components/Stepper";
+import "./styles/formulario.css";
+import "./styles/stepper.css";
 
-export default function DadosVisita() { //Criando componente chamado "DadosVisita" que é tipo uma função que retorna iterface HTML
-    const navigate = useNavigate()
+export default function DadosVisita() {
+    const navigate = useNavigate();
 
-    const [dados, setDados] = useState({ //Criando o estado dos dados. 'dados -> valores atuais', setDados -> atualiza
+    const [dados, setDados] = useState({
         quemConvidou: "",
         setor: "",
-        qntdVisitantes: 0, // agora começa como número
+        qntdVisitantes: 0,
         data: "",
         horario: "",
     });
 
-    const [erro, setErro] = useState({ //Criando um estado chamado "erro". 'erro -> guarda os erros atuais', setErro -> atualiza
+    const [erro, setErro] = useState({
         quemConvidou: "",
         setor: "",
         qntdVisitantes: "",
         data: "",
         horario: "",
-    })
+    });
 
+    function alterarDados(evento) {
+        const nomeCampo = evento.target.name;
+        let valor = evento.target.value;
 
-    function alterarDados(evento) { //Função de mudança. Essa função roda toda vez que o usuario digita
-        const nomeCampo = evento.target.name; //Pega QUAL campo foi alterado
-        let valor = evento.target.value; //Pega O QUE o usuario digitou
-
-        // Se for número, converte
         if (nomeCampo === "qntdVisitantes") {
             valor = Number(valor);
         }
 
-        setDados({ //mantém tudo o que já existia. Atualiza só o campo alterado
+        setDados({
             ...dados,
             [nomeCampo]: valor
         });
 
-        setErro({ //Limpa o erro daquele campo
+        setErro({
             ...erro,
             [nomeCampo]: ""
-        })
+        });
     }
 
-    function enviarFormulario(evento) { //Executa quando clica em 'Enviar'
+    function enviarFormulario(evento) {
         evento.preventDefault();
 
-        let novosErros = { //Cria novos erros. Começa "zerado"
+        let novosErros = {
             quemConvidou: "",
             setor: "",
             qntdVisitantes: "",
             data: "",
             horario: "",
-        }
+        };
 
-        if (!dados.quemConvidou) {
-            novosErros.quemConvidou = "Esse campo é obrigatório"
-        }
+        if (!dados.quemConvidou) novosErros.quemConvidou = "Esse campo é obrigatório";
+        if (!dados.setor) novosErros.setor = "Esse campo é obrigatório";
+        if (!dados.qntdVisitantes || dados.qntdVisitantes <= 0)
+            novosErros.qntdVisitantes = "Esse campo é obrigatório";
+        if (!dados.data) novosErros.data = "Esse campo é obrigatório";
+        if (!dados.horario) novosErros.horario = "Esse campo é obrigatório";
 
-        if (!dados.setor) {
-            novosErros.setor = "Esse campo é obrigatório"
-        }
-
-        if (!dados.qntdVisitantes || dados.qntdVisitantes <= 0) { //validação ajustada
-            novosErros.qntdVisitantes = "Esse campo é obrigatório"
-        }
-
-        if (!dados.data) {
-            novosErros.data = "Esse campo é obrigatório"
-        }
-
-        if (!dados.horario) {
-            novosErros.horario = "Esse campo é obrigatório"
-        }
-
-        setErro(novosErros); //Atualiza estado de erro. Mostra os erros na tela
+        setErro(novosErros);
 
         if (
             novosErros.quemConvidou ||
@@ -83,10 +69,9 @@ export default function DadosVisita() { //Criando componente chamado "DadosVisit
             novosErros.data ||
             novosErros.horario
         ) {
-            return; //Se qualquer campo tiver erro -> PARA aqui. Não envia.
+            return;
         }
 
-        //Só navega se estiver tudo certo
         localStorage.setItem("dadosVisita", JSON.stringify(dados));
         navigate("/InformacoesAdicionais");
 
@@ -96,77 +81,107 @@ export default function DadosVisita() { //Criando componente chamado "DadosVisit
             qntdVisitantes: 0,
             data: "",
             horario: "",
-        })
+        });
     }
 
     return (
-        <div>
+        <div className="form-page">
             <Stepper etapaAtual={2} />
-            <div>
-                <h3>Dados da Visita</h3>
-                <p>Preencha as informações da visita</p>
+
+            <div className="form-header">
+                <h3 className="form-title">Dados da Visita</h3>
+                <p className="form-subtitle">Preencha as informações da visita</p>
             </div>
 
-            <div>
+            <div className="form-nav">
                 <Link to={"/"}>
-                    <button type="button">Voltar para Home</button>
+                    <button type="button" className="form-button form-button-secondary">
+                        Voltar para Home
+                    </button>
                 </Link>
             </div>
 
-            <form onSubmit={enviarFormulario}>
+            <form onSubmit={enviarFormulario} className="form-container">
 
                 <input
+                    className="form-input"
                     type="text"
                     name="quemConvidou"
                     value={dados.quemConvidou}
                     onChange={alterarDados}
                     placeholder="Nome do colaborador"
                 />
-                {erro.quemConvidou && <p>{erro.quemConvidou}</p>}
+                {erro.quemConvidou && (
+                    <p className="form-error">{erro.quemConvidou}</p>
+                )}
 
                 <input
+                    className="form-input"
                     type="text"
                     name="setor"
-                    placeholder="Selecione o setor"
                     value={dados.setor}
                     onChange={alterarDados}
+                    placeholder="Selecione o setor"
                 />
-                {erro.setor && <p>{erro.setor}</p>}
+                {erro.setor && (
+                    <p className="form-error">{erro.setor}</p>
+                )}
 
                 <input
+                    className="form-input"
                     type="number"
                     name="qntdVisitantes"
                     value={dados.qntdVisitantes}
                     onChange={alterarDados}
                     placeholder="Quantidade de visitantes"
-                    min="1" // impede valores inválidos
+                    min="1"
                 />
-                {erro.qntdVisitantes && <p>{erro.qntdVisitantes}</p>}
+                {erro.qntdVisitantes && (
+                    <p className="form-error">{erro.qntdVisitantes}</p>
+                )}
 
                 <input
+                    className="form-input"
                     type="date"
                     name="data"
                     value={dados.data}
                     onChange={alterarDados}
                 />
-                {erro.data && <p>{erro.data}</p>}
+                {erro.data && (
+                    <p className="form-error">{erro.data}</p>
+                )}
 
                 <input
+                    className="form-input"
                     type="time"
                     name="horario"
                     value={dados.horario}
                     onChange={alterarDados}
                 />
-                {erro.horario && <p>{erro.horario}</p>}
+                {erro.horario && (
+                    <p className="form-error">{erro.horario}</p>
+                )}
 
-                <Link to={"/Formulario"}>
-                    <button type="button">Anterior</button>
-                </Link>
+                <div className="form-buttons">
 
-                <button type="submit">Próximo</button>
+                    <Link to={"/Formulario"}>
+                        <button
+                            type="button"
+                            className="form-button form-button-secondary"
+                        >
+                            Anterior
+                        </button>
+                    </Link>
 
+                    <button
+                        type="submit"
+                        className="form-button form-button-primary"
+                    >
+                        Próximo
+                    </button>
+
+                </div>
             </form>
-
         </div>
-    )
+    );
 }

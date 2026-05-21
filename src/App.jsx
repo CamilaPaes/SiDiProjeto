@@ -7,6 +7,7 @@ import DadosVisita from "./Formulario/DadosVisita";
 import InformacoesAdicionais from "./Formulario/InformacoesAdicionais";
 import Colaborador from "./Colaborador/Colaborador";
 import Revisao from "./Formulario/Revisao";
+import Recepcao from "./Recepcionista/Recepcao";
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
             <Route path="/informacoesadicionais" element={<InformacoesAdicionais />}></Route>
             <Route path="/colaborador" element={<Colaborador />}></Route>
             <Route path="/revisao" element={<Revisao />}></Route>
+            <Route path="/recepcao" element={<Recepcao />}></Route>
           </Routes>
         </main>
       </div>

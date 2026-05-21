@@ -4,7 +4,6 @@ import { UserRound, UsersRound, UserCheck, Settings, ArrowRight } from "lucide-r
 import CardBeneficios from "./CardBeneficios"
 import AcessosPerfil from "./AcessosPerfil"
 import ListaEtapas from "./ListaEtapas"
-
 import "./css/Inicio.css"
 
 export default function Inicio() {
@@ -92,6 +91,8 @@ export default function Inicio() {
                     icone={<UserCheck />}
                     perfil="Recepcionista"
                     seta={<ArrowRight size={18} />}
+                    to="/Recepcao"
+
                 />
 
                 <AcessosPerfil

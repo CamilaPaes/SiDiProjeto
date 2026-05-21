@@ -19,25 +19,39 @@ export default function TabelaSolicitacao({ requests }) {
                         <td>{req.code}</td>
 
                         <td>
-                            <div>{req.name}</div>
-                            <div>{req.email}</div>
+                            <div className="user-name">{req.name}</div>
+                            <div className="user-email">{req.email}</div>
                         </td>
 
                         <td>{req.company}</td>
 
                         <td>
-                            <div>{req.date}</div>
-                            <div>{req.time}</div>
+                            <div className="date">{req.date}</div>
+                            <div className="time">{req.time}</div>
                         </td>
 
-                        <td>{req.type}</td>
-
-                        <td>{req.status}</td>
+                        <td>
+                            <span className="type-badge">
+                                {req.type}
+                            </span>
+                        </td>
 
                         <td>
-                            <button>Aprovar</button>
-                            <button>Recusar</button>
+                            <span className="status">
+                                {req.status}
+                            </span>
+                        </td>
 
+                        <td>
+                            <div className="actions">
+                                <button className="btn-approve">
+                                    Aprovar
+                                </button>
+
+                                <button className="btn-reject">
+                                    Recusar
+                                </button>
+                            </div>
                         </td>
                     </tr>
                 ))}

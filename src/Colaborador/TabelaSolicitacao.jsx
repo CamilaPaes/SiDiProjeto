@@ -1,6 +1,12 @@
-export default function TabelaSolicitacao({ requests }) {
+export default function TabelaSolicitacao({
+    requests,
+    onApprove,
+    onReject,
+}) {
+
     return (
         <table>
+
             <thead>
                 <tr>
                     <th>Código</th>
@@ -14,13 +20,21 @@ export default function TabelaSolicitacao({ requests }) {
             </thead>
 
             <tbody>
+
                 {requests.map((req) => (
+
                     <tr key={req.id}>
+
                         <td>{req.code}</td>
 
                         <td>
-                            <div className="user-name">{req.name}</div>
-                            <div className="user-email">{req.email}</div>
+                            <div className="user-name">
+                                {req.name}
+                            </div>
+
+                            <div className="user-email">
+                                {req.email}
+                            </div>
                         </td>
 
                         <td>{req.company}</td>
@@ -37,25 +51,39 @@ export default function TabelaSolicitacao({ requests }) {
                         </td>
 
                         <td>
-                            <span className="status">
+                            <span className={`status ${req.status.toLowerCase()}`}>
                                 {req.status}
                             </span>
                         </td>
 
                         <td>
+
                             <div className="actions">
-                                <button className="btn-approve">
+
+                                <button
+                                    className="btn-approve"
+                                    onClick={() => onApprove(req)}
+                                >
                                     Aprovar
                                 </button>
 
-                                <button className="btn-reject">
+                                <button
+                                    className="btn-reject"
+                                    onClick={() => onReject(req)}
+                                >
                                     Recusar
                                 </button>
+
                             </div>
+
                         </td>
+
                     </tr>
+
                 ))}
+
             </tbody>
+
         </table>
     );
 }

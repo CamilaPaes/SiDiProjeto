@@ -1,6 +1,6 @@
 import TabelaSolicitacao from "./TabelaSolicitacao";
 import "./styles/Colaborador.css"
-
+import Sidebar from "../Sidebar/Sidebar";
 
 export default function Colaborador() {
 
@@ -42,23 +42,34 @@ export default function Colaborador() {
 
     return (
         <div className="colaborador-container">
+            <div className="layout">
 
-            <div className="colaborador-header">
-                <h2>Painel do Colaborador</h2>
-                <p>Gerencie os cadastros vinculados ao seu nome</p>
+                <Sidebar titulo="Painel do Colaborador" />
+
+                <div className="conteudo-pagina">
+
+                    <div className="colaborador-container">
+
+                        <div className="colaborador-header">
+                            <h2>Painel do Colaborador</h2>
+                            <p>Gerencie os cadastros vinculados ao seu nome</p>
+                        </div>
+
+                        <div className="alert-box">
+                            <h4>Você tem 3 cadastros pendentes de aprovação</h4>
+                            <p>
+                                Revise e aprove os cadastros para liberar o acesso dos visitantes
+                            </p>
+                        </div>
+
+                        <div className="table-container">
+                            <TabelaSolicitacao requests={requests} />
+                        </div>
+
+                    </div>
+
+                </div>
             </div>
-
-            <div className="alert-box">
-                <h4>Você tem 3 cadastros pendentes de aprovação</h4>
-                <p>
-                    Revise e aprove os cadastros para liberar o acesso dos visitantes
-                </p>
-            </div>
-
-            <div className="table-container">
-                <TabelaSolicitacao requests={requests} />
-            </div>
-
         </div>
     );
 }

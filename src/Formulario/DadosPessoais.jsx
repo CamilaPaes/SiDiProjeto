@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Stepper from "../components/Stepper";
 import "./styles/formulario.css";
 import "./styles/stepper.css";
+import Sidebar from "../Sidebar/Sidebar";
 
 export default function DadosPessoais() {
     const navigate = useNavigate();
@@ -85,91 +86,98 @@ export default function DadosPessoais() {
 
     return (
         <div className="form-page">
-            <Stepper etapaAtual={1} />
+            <div className="layout">
+                <Sidebar titulo="Pré-Cadastro" />
 
-            <div className="form-header">
-                <h3 className="form-title">Dados Pessoais</h3>
-                <p className="form-subtitle">Preencha suas informações</p>
-            </div>
+                <div className="conteudo-pagina">
 
-            <div className="form-nav">
-                <Link to={"/"}>
-                    <button type="button" className="form-button form-button-secondary">
-                        Voltar para Home
-                    </button>
-                </Link>
-            </div>
+                    <div className="formulario-container">
 
-            <form onSubmit={enviarFormulario} className="form-container">
 
-                <input
-                    className="form-input"
-                    name="nome"
-                    type="text"
-                    value={dadosPessoais.nome}
-                    onChange={alterarValor}
-                    placeholder="Digite seu nome"
-                />
-                {erros.nome && <p className="form-error">{erros.nome}</p>}
+                        <Stepper etapaAtual={1} />
 
-                <input
-                    className="form-input"
-                    name="cpf"
-                    type="text"
-                    value={dadosPessoais.cpf}
-                    onChange={alterarValor}
-                    placeholder="Digite seu CPF"
-                />
-                {erros.cpf && <p className="form-error">{erros.cpf}</p>}
+                        <div className="form-header">
+                            <h3 className="form-title">Dados Pessoais</h3>
+                            <p className="form-subtitle">Preencha suas informações</p>
+                        </div>
 
-                <input
-                    className="form-input"
-                    name="telefone"
-                    type="text"
-                    value={dadosPessoais.telefone}
-                    onChange={alterarValor}
-                    placeholder="Digite seu telefone"
-                />
-                {erros.telefone && <p className="form-error">{erros.telefone}</p>}
 
-                <input
-                    className="form-input"
-                    name="email"
-                    type="email"
-                    value={dadosPessoais.email}
-                    onChange={alterarValor}
-                    placeholder="Digite seu email"
-                />
-                {erros.email && <p className="form-error">{erros.email}</p>}
 
-                <input
-                    className="form-input"
-                    name="empresa"
-                    type="text"
-                    value={dadosPessoais.empresa}
-                    onChange={alterarValor}
-                    placeholder="Digite o nome da empresa"
-                />
-                {erros.empresa && <p className="form-error">{erros.empresa}</p>}
+                        <form onSubmit={enviarFormulario} className="form-container">
 
-                <div className="form-buttons">
-                    <Link to={"/ApresentacaoAssistente"}>
-                        <button
-                            type="button"
-                            className="form-button form-button-secondary"
-                        >
-                            Anterior
-                        </button>
-                    </Link>
+                            <input
+                                className="form-input"
+                                name="nome"
+                                type="text"
+                                value={dadosPessoais.nome}
+                                onChange={alterarValor}
+                                placeholder="Digite seu nome"
+                            />
+                            {erros.nome && <p className="form-error">{erros.nome}</p>}
 
-                    <button
-                        type="submit"
-                        className="form-button form-button-primary"
-                    >
-                        Próximo
-                    </button>
+                            <input
+                                className="form-input"
+                                name="cpf"
+                                type="text"
+                                value={dadosPessoais.cpf}
+                                onChange={alterarValor}
+                                placeholder="Digite seu CPF"
+                            />
+                            {erros.cpf && <p className="form-error">{erros.cpf}</p>}
+
+                            <input
+                                className="form-input"
+                                name="telefone"
+                                type="text"
+                                value={dadosPessoais.telefone}
+                                onChange={alterarValor}
+                                placeholder="Digite seu telefone"
+                            />
+                            {erros.telefone && <p className="form-error">{erros.telefone}</p>}
+
+                            <input
+                                className="form-input"
+                                name="email"
+                                type="email"
+                                value={dadosPessoais.email}
+                                onChange={alterarValor}
+                                placeholder="Digite seu email"
+                            />
+                            {erros.email && <p className="form-error">{erros.email}</p>}
+
+                            <input
+                                className="form-input"
+                                name="empresa"
+                                type="text"
+                                value={dadosPessoais.empresa}
+                                onChange={alterarValor}
+                                placeholder="Digite o nome da empresa"
+                            />
+                            {erros.empresa && <p className="form-error">{erros.empresa}</p>}
+
+                            <div className="form-buttons">
+                                <Link to={"/ApresentacaoAssistente"}>
+                                    <button
+                                        type="button"
+                                        className="form-button form-button-secondary"
+                                    >
+                                        Anterior
+                                    </button>
+                                </Link>
+
+                                <button
+                                    type="submit"
+                                    className="form-button form-button-primary"
+                                >
+                                    Próximo
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </form>
+
+            </div>
         </div>
+
     );
 }

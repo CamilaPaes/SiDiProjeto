@@ -4,6 +4,8 @@ import CheckinRapido from "./CheckinRapido";
 import TabelaVisitantes from "./TabelaVisitantes";
 import { visitantesIniciais } from "./dadosMock";
 import "./style/recepcao.css"
+import Sidebar from "../Sidebar/Sidebar";
+
 
 export default function Recepcao() {
     const [visitantes, setVisitantes] = useState(visitantesIniciais);
@@ -52,31 +54,43 @@ export default function Recepcao() {
     );
 
     return (
-        <div className="recepcao-container">
-            <div className="recepcao-header">
-                <h1>Dashboard da Recepção</h1>
-                <p>
-                    Gerencie a entrada e saída de visitantes em tempo real
-                </p>
-            </div>
+        <div className="layout">
+            <Sidebar titulo="Dashboard da Recepção" />
 
-            {existeAtrasado && (
-                <div className="alerta-atraso">
-                    Há visitantes com atraso. Verifique os detalhes.
+            <div className="conteudo-pagina">
+                <div className="recepcao-container">
+
+                    <div className="recepcao-container">
+                        <div className="recepcao-header">
+                            <h1>Dashboard da Recepção</h1>
+                            <p>
+                                Gerencie a entrada e saída de visitantes em tempo real
+                            </p>
+                        </div>
+
+                        {existeAtrasado && (
+                            <div className="alerta-atraso">
+                                Há visitantes com atraso. Verifique os detalhes.
+                            </div>
+                        )}
+
+                        <DashboardCards visitantes={visitantesFiltrados} />
+
+                        <CheckinRapido
+                            busca={busca}
+                            setBusca={setBusca}
+                        />
+
+                        <TabelaVisitantes
+                            visitantes={visitantesFiltrados}
+                            atualizarStatus={atualizarStatus}
+                        />
+                    </div>
                 </div>
-            )}
-
-            <DashboardCards visitantes={visitantesFiltrados} />
-
-            <CheckinRapido
-                busca={busca}
-                setBusca={setBusca}
-            />
-
-            <TabelaVisitantes
-                visitantes={visitantesFiltrados}
-                atualizarStatus={atualizarStatus}
-            />
+            </div>
         </div>
     );
+
+
+
 }

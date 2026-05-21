@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Stepper from "../components/Stepper";
 import "./styles/formulario.css";
 import "./styles/stepper.css";
+import Sidebar from "../Sidebar/Sidebar";
 
 export default function InformacoesAdicionais() {
 
@@ -73,86 +74,99 @@ export default function InformacoesAdicionais() {
 
     return (
         <div className="form-page">
-            <Stepper etapaAtual={3} />
 
-            <div className="form-header">
-                <h3 className="form-title">Informações Adicionais</h3>
-                <p className="form-subtitle">Complete com dados complementares</p>
-            </div>
 
-            <div className="form-nav">
-                <Link to={"/"}>
-                    <button type="button" className="form-button form-button-secondary">
-                        Voltar para Home
-                    </button>
-                </Link>
-            </div>
+            <div className="layout">
 
-            <form onSubmit={enviarFormulario} className="form-container">
+                <Sidebar titulo="Pré-Cadastro" />
 
-                <select
-                    className="form-input"
-                    name="tipoVisitante"
-                    value={informacoesAdicionais.tipoVisitante}
-                    onChange={alterarValor}
-                >
-                    <option value="">Selecione o tipo</option>
-                    <option value="visitante">Visitante</option>
-                    <option value="fornecedor">Fornecedor</option>
-                    <option value="prestador">Prestador de serviço</option>
-                    <option value="entrevista">Entrevista</option>
-                </select>
+                <div className="conteudo-pagina">
 
-                {erros.tipoVisitante && (
-                    <p className="form-error">{erros.tipoVisitante}</p>
-                )}
+                    <div className="formulario-container">
 
-                <input
-                    className="form-input"
-                    type="text"
-                    name="placaVeiculo"
-                    value={informacoesAdicionais.placaVeiculo}
-                    onChange={alterarValor}
-                    placeholder="ABC-1234"
-                />
+                        <Stepper etapaAtual={3} />
 
-                {erros.placaVeiculo && (
-                    <p className="form-error">{erros.placaVeiculo}</p>
-                )}
+                        <div className="form-header">
+                            <h3 className="form-title">Informações Adicionais</h3>
+                            <p className="form-subtitle">Complete com dados complementares</p>
+                        </div>
 
-                <input
-                    className="form-input"
-                    type="text"
-                    name="observacao"
-                    value={informacoesAdicionais.observacao}
-                    onChange={alterarValor}
-                    placeholder="Ex: necessidades especiais, materiais que trará"
-                />
 
-                {erros.observacao && (
-                    <p className="form-error">{erros.observacao}</p>
-                )}
 
-                <div className="form-buttons">
+                        <form onSubmit={enviarFormulario} className="form-container">
 
-                    <Link to={"/DadosVisita"}>
-                        <button
-                            type="button"
-                            className="form-button form-button-secondary"
-                        >
-                            Anterior
-                        </button>
-                    </Link>
+                            <select
+                                className="form-input"
+                                name="tipoVisitante"
+                                value={informacoesAdicionais.tipoVisitante}
+                                onChange={alterarValor}
+                            >
+                                <option value="">Selecione o tipo</option>
+                                <option value="visitante">Visitante</option>
+                                <option value="fornecedor">Fornecedor</option>
+                                <option value="prestador">Prestador de serviço</option>
+                                <option value="entrevista">Entrevista</option>
+                            </select>
 
-                    <button
-                        type="submit"
-                        className="form-button form-button-primary"
-                    >
-                        Próximo
-                    </button>
+                            {erros.tipoVisitante && (
+                                <p className="form-error">{erros.tipoVisitante}</p>
+                            )}
+
+                            <input
+                                className="form-input"
+                                type="text"
+                                name="placaVeiculo"
+                                value={informacoesAdicionais.placaVeiculo}
+                                onChange={alterarValor}
+                                placeholder="ABC-1234"
+                            />
+
+                            {erros.placaVeiculo && (
+                                <p className="form-error">{erros.placaVeiculo}</p>
+                            )}
+
+                            <input
+                                className="form-input"
+                                type="text"
+                                name="observacao"
+                                value={informacoesAdicionais.observacao}
+                                onChange={alterarValor}
+                                placeholder="Ex: necessidades especiais, materiais que trará"
+                            />
+
+                            {erros.observacao && (
+                                <p className="form-error">{erros.observacao}</p>
+                            )}
+
+                            <div className="form-buttons">
+
+                                <Link to={"/DadosVisita"}>
+                                    <button
+                                        type="button"
+                                        className="form-button form-button-secondary"
+                                    >
+                                        Anterior
+                                    </button>
+                                </Link>
+
+                                <button
+                                    type="submit"
+                                    className="form-button form-button-primary"
+                                >
+                                    Próximo
+                                </button>
+
+                            </div>
+                        </form>
+                    </div>
 
                 </div>
-            </form>
+
+            </div>
         </div>
     );
+
+
+
+
 }

@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Stepper from "../components/Stepper";
 import "./styles/formulario.css";
 import "./styles/stepper.css";
+import Sidebar from "../Sidebar/Sidebar";
 
 export default function DadosVisita() {
     const navigate = useNavigate();
@@ -86,102 +87,110 @@ export default function DadosVisita() {
 
     return (
         <div className="form-page">
-            <Stepper etapaAtual={2} />
 
-            <div className="form-header">
-                <h3 className="form-title">Dados da Visita</h3>
-                <p className="form-subtitle">Preencha as informações da visita</p>
-            </div>
+            <div className="layout">
 
-            <div className="form-nav">
-                <Link to={"/"}>
-                    <button type="button" className="form-button form-button-secondary">
-                        Voltar para Home
-                    </button>
-                </Link>
-            </div>
+                <Sidebar titulo="Pré-Cadastro" />
 
-            <form onSubmit={enviarFormulario} className="form-container">
+                <div className="conteudo-pagina">
 
-                <input
-                    className="form-input"
-                    type="text"
-                    name="quemConvidou"
-                    value={dados.quemConvidou}
-                    onChange={alterarDados}
-                    placeholder="Nome do colaborador"
-                />
-                {erro.quemConvidou && (
-                    <p className="form-error">{erro.quemConvidou}</p>
-                )}
+                    <div className="formulario-container">
 
-                <input
-                    className="form-input"
-                    type="text"
-                    name="setor"
-                    value={dados.setor}
-                    onChange={alterarDados}
-                    placeholder="Selecione o setor"
-                />
-                {erro.setor && (
-                    <p className="form-error">{erro.setor}</p>
-                )}
+                        <Stepper etapaAtual={2} />
 
-                <input
-                    className="form-input"
-                    type="number"
-                    name="qntdVisitantes"
-                    value={dados.qntdVisitantes}
-                    onChange={alterarDados}
-                    placeholder="Quantidade de visitantes"
-                    min="1"
-                />
-                {erro.qntdVisitantes && (
-                    <p className="form-error">{erro.qntdVisitantes}</p>
-                )}
+                        <div className="form-header">
+                            <h3 className="form-title">Dados da Visita</h3>
+                            <p className="form-subtitle">Preencha as informações da visita</p>
+                        </div>
 
-                <input
-                    className="form-input"
-                    type="date"
-                    name="data"
-                    value={dados.data}
-                    onChange={alterarDados}
-                />
-                {erro.data && (
-                    <p className="form-error">{erro.data}</p>
-                )}
 
-                <input
-                    className="form-input"
-                    type="time"
-                    name="horario"
-                    value={dados.horario}
-                    onChange={alterarDados}
-                />
-                {erro.horario && (
-                    <p className="form-error">{erro.horario}</p>
-                )}
 
-                <div className="form-buttons">
+                        <form onSubmit={enviarFormulario} className="form-container">
 
-                    <Link to={"/Formulario"}>
-                        <button
-                            type="button"
-                            className="form-button form-button-secondary"
-                        >
-                            Anterior
-                        </button>
-                    </Link>
+                            <input
+                                className="form-input"
+                                type="text"
+                                name="quemConvidou"
+                                value={dados.quemConvidou}
+                                onChange={alterarDados}
+                                placeholder="Nome do colaborador"
+                            />
+                            {erro.quemConvidou && (
+                                <p className="form-error">{erro.quemConvidou}</p>
+                            )}
 
-                    <button
-                        type="submit"
-                        className="form-button form-button-primary"
-                    >
-                        Próximo
-                    </button>
+                            <input
+                                className="form-input"
+                                type="text"
+                                name="setor"
+                                value={dados.setor}
+                                onChange={alterarDados}
+                                placeholder="Selecione o setor"
+                            />
+                            {erro.setor && (
+                                <p className="form-error">{erro.setor}</p>
+                            )}
+
+                            <input
+                                className="form-input"
+                                type="number"
+                                name="qntdVisitantes"
+                                value={dados.qntdVisitantes}
+                                onChange={alterarDados}
+                                placeholder="Quantidade de visitantes"
+                                min="1"
+                            />
+                            {erro.qntdVisitantes && (
+                                <p className="form-error">{erro.qntdVisitantes}</p>
+                            )}
+
+                            <input
+                                className="form-input"
+                                type="date"
+                                name="data"
+                                value={dados.data}
+                                onChange={alterarDados}
+                            />
+                            {erro.data && (
+                                <p className="form-error">{erro.data}</p>
+                            )}
+
+                            <input
+                                className="form-input"
+                                type="time"
+                                name="horario"
+                                value={dados.horario}
+                                onChange={alterarDados}
+                            />
+                            {erro.horario && (
+                                <p className="form-error">{erro.horario}</p>
+                            )}
+
+                            <div className="form-buttons">
+
+                                <Link to={"/Formulario"}>
+                                    <button
+                                        type="button"
+                                        className="form-button form-button-secondary"
+                                    >
+                                        Anterior
+                                    </button>
+                                </Link>
+
+                                <button
+                                    type="submit"
+                                    className="form-button form-button-primary"
+                                >
+                                    Próximo
+                                </button>
+
+                            </div>
+                        </form>
+                    </div>
 
                 </div>
-            </form>
+
+            </div>
         </div>
     );
 }

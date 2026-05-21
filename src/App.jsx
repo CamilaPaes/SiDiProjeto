@@ -8,6 +8,7 @@ import InformacoesAdicionais from "./Formulario/InformacoesAdicionais";
 import Colaborador from "./Colaborador/Colaborador";
 import Revisao from "./Formulario/Revisao";
 import Recepcao from "./Recepcionista/Recepcao";
+import Notificacoes from "./Notificacoes/Notificacoes";
 
 export default function App() {
   return (
@@ -24,6 +25,8 @@ export default function App() {
             <Route path="/colaborador" element={<Colaborador />}></Route>
             <Route path="/revisao" element={<Revisao />}></Route>
             <Route path="/recepcao" element={<Recepcao />}></Route>
+            <Route path="/notificacoes" element={<Notificacoes />}></Route>
+
           </Routes>
         </main>
       </div>

@@ -3,7 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import Stepper from "../components/Stepper";
 import "./styles/formulario.css";
 import "./styles/stepper.css";
-import Sidebar from "../Sidebar/Sidebar";
+import Sidebar2 from "../Sidebar2/Sidebar2"
+
 
 export default function DadosVisita() {
     const navigate = useNavigate();
@@ -90,7 +91,9 @@ export default function DadosVisita() {
 
             <div className="layout">
 
-                <Sidebar titulo="Pré-Cadastro" />
+                <Sidebar2
+                    titulo="Dados Visita"
+                />
 
                 <div className="conteudo-pagina">
 

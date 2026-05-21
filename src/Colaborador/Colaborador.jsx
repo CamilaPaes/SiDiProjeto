@@ -1,9 +1,12 @@
 import { useState } from "react";
 import TabelaSolicitacao from "./TabelaSolicitacao";
 import "./styles/Colaborador.css";
-import Sidebar from "../Sidebar/Sidebar";
+import Sidebar2 from "../Sidebar2/Sidebar2";
+import { useNotificacoes } from "../context/NotificacaoContext";
 
 export default function Colaborador() {
+    const { adicionarNotificacao } =
+        useNotificacoes();
 
     const [requests, setRequests] = useState([
         {
@@ -68,6 +71,17 @@ export default function Colaborador() {
 
         setRequests(updatedRequests);
 
+
+
+        adicionarNotificacao({
+            titulo: "Cadastro Aprovado",
+            mensagem:
+                `${selectedRequest.name} foi aprovado.`,
+            data: new Date().toLocaleString(),
+            tipo: "sucesso",
+        });
+
+
         setShowApproveModal(false);
     }
 
@@ -81,6 +95,16 @@ export default function Colaborador() {
 
         setRequests(updatedRequests);
 
+
+        adicionarNotificacao({
+            titulo: "Cadastro Recusado",
+            mensagem:
+                `${selectedRequest.name} foi recusado.`,
+            data: new Date().toLocaleString(),
+            tipo: "alerta",
+        });
+
+
         setShowRejectModal(false);
         setRejectReason("");
     }
@@ -90,7 +114,7 @@ export default function Colaborador() {
 
             <div className="layout">
 
-                <Sidebar titulo="Painel do Colaborador" />
+                <Sidebar2 titulo="Painel do Colaborador" />
 
                 <div className="conteudo-pagina">
 

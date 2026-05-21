@@ -4,7 +4,7 @@ import CheckinRapido from "./CheckinRapido";
 import TabelaVisitantes from "./TabelaVisitantes";
 import { visitantesIniciais } from "./dadosMock";
 import "./style/recepcao.css"
-import Sidebar from "../Sidebar/Sidebar";
+import Sidebar from "../SidebarForm/Sidebar";
 
 
 export default function Recepcao() {
@@ -55,7 +55,12 @@ export default function Recepcao() {
 
     return (
         <div className="layout">
-            <Sidebar titulo="Dashboard da Recepção" />
+            <Sidebar
+                titulo="Dashboard da Recepção"
+                mostrarNotificacoes={true}
+            />
+
+
 
             <div className="conteudo-pagina">
                 <div className="recepcao-container">

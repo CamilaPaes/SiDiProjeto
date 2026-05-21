@@ -4,8 +4,15 @@ import './index.css'
 import App from './App.jsx'
 import "./global.css";
 
+
+import { NotificacaoProvider } from "./context/NotificacaoContext";
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+
+    <NotificacaoProvider>
+      <App />
+    </NotificacaoProvider>
+
   </StrictMode>,
 )

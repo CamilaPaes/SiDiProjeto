@@ -1,43 +1,28 @@
 import StatusBadge from "./StatusBadge";
 
-export default function TabelaVisitantes({
-    visitantes,
-    atualizarStatus,
-}) {
+export default function TabelaVisitantes({ visitantes, atualizarStatus }) {
     function renderizarBotao(visitante) {
         if (visitante.status === "aguardando") {
             return (
-                <button
-                    className="botao-acao botao-checkin"
-                    onClick={() => atualizarStatus(visitante.id)}
-                >
+                <button className="botao-acao botao-checkin" onClick={() => atualizarStatus(visitante.id)}>
                     Check-in
                 </button>
             );
         }
-
         if (visitante.status === "atrasado") {
             return (
-                <button
-                    className="botao-acao botao-atrasado"
-                    onClick={() => atualizarStatus(visitante.id)}
-                >
+                <button className="botao-acao botao-atrasado" onClick={() => atualizarStatus(visitante.id)}>
                     Check-in
                 </button>
             );
         }
-
         if (visitante.status === "presente") {
             return (
-                <button
-                    className="botao-acao botao-checkout"
-                    onClick={() => atualizarStatus(visitante.id)}
-                >
+                <button className="botao-acao botao-checkout" onClick={() => atualizarStatus(visitante.id)}>
                     Check-out
                 </button>
             );
         }
-
         return null;
     }
 
@@ -55,32 +40,21 @@ export default function TabelaVisitantes({
                         <th>Ações</th>
                     </tr>
                 </thead>
-
                 <tbody>
                     {visitantes.map((visitante) => (
                         <tr key={visitante.id}>
                             <td>{visitante.codigo}</td>
-
                             <td>
                                 <div className="visitante-info">
                                     <div>{visitante.visitante}</div>
                                     <small>{visitante.cpf}</small>
                                 </div>
                             </td>
-
                             <td>{visitante.empresa}</td>
-
                             <td>{visitante.horario}</td>
-
                             <td>{visitante.contato}</td>
-
-                            <td>
-                                <StatusBadge status={visitante.status} />
-                            </td>
-
-                            <td>
-                                {renderizarBotao(visitante)}
-                            </td>
+                            <td><StatusBadge status={visitante.status} /></td>
+                            <td>{renderizarBotao(visitante)}</td>
                         </tr>
                     ))}
                 </tbody>

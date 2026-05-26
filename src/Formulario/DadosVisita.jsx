@@ -4,6 +4,7 @@ import Stepper from "../components/Stepper";
 import "./styles/formulario.css";
 import "./styles/stepper.css";
 import Sidebar2 from "../Sidebar2/Sidebar2"
+import AssistenteIA from "../AssistenteIA";
 
 
 export default function DadosVisita() {
@@ -122,17 +123,20 @@ export default function DadosVisita() {
                                 <p className="form-error">{erro.quemConvidou}</p>
                             )}
 
-                            <input
+                            <select
                                 className="form-input"
-                                type="text"
                                 name="setor"
                                 value={dados.setor}
                                 onChange={alterarDados}
-                                placeholder="Selecione o setor"
-                            />
-                            {erro.setor && (
-                                <p className="form-error">{erro.setor}</p>
-                            )}
+                            >
+                                <option value="">Selecione o setor</option>
+                                <option value="TI">TI</option>
+                                <option value="RECURSOS_HUMANOS">Recursos Humanos</option>
+                                <option value="FINANCEIRO">Financeiro</option>
+                                <option value="COMERCIAL">Comercial</option>
+                                <option value="OPERACOES">Operações</option>
+                                <option value="DIRETORIA">Diretoria</option>
+                            </select>
 
                             <input
                                 className="form-input"
@@ -190,7 +194,7 @@ export default function DadosVisita() {
                             </div>
                         </form>
                     </div>
-
+                    <AssistenteIA />
                 </div>
 
             </div>

@@ -4,6 +4,7 @@ import Stepper from "../components/Stepper";
 import "./styles/formulario.css";
 import "./styles/stepper.css";
 import Sidebar2 from "../Sidebar2/Sidebar2"
+import AssistenteIA from "../AssistenteIA";
 
 export default function InformacoesAdicionais() {
 
@@ -161,6 +162,7 @@ export default function InformacoesAdicionais() {
                             </div>
                         </form>
                     </div>
+                    <AssistenteIA />
 
                 </div>
 

@@ -4,6 +4,7 @@ import Stepper from "../components/Stepper";
 import "./styles/formulario.css";
 import "./styles/stepper.css";
 import Sidebar2 from "../Sidebar2/Sidebar2";
+import AssistenteIA from "../AssistenteIA";
 
 export default function DadosPessoais() {
     const navigate = useNavigate();
@@ -26,7 +27,15 @@ export default function DadosPessoais() {
 
     function alterarValor(evento) {
         const nomeCampo = evento.target.name;
-        const valor = evento.target.value;
+        let valor = evento.target.value;
+
+        // Se for CPF, remove tudo que não for número
+        if (nomeCampo === "cpf") {
+            valor = valor.replace(/\D/g, ""); // Remove caracteres não numéricos
+            if (valor.length > 11) {
+                valor = valor.slice(0, 11); // Limita a 11 dígitos
+            }
+        }
 
         setDadosPessoais({
             ...dadosPessoais,
@@ -55,6 +64,13 @@ export default function DadosPessoais() {
         if (!dadosPessoais.empresa) novosErros.empresa = "Empresa é obrigatória";
         if (!dadosPessoais.cpf) novosErros.cpf = "CPF é obrigatório";
         if (!dadosPessoais.telefone) novosErros.telefone = "Telefone é obrigatório";
+
+        // Validação específica do CPF
+        if (!dadosPessoais.cpf) {
+            novosErros.cpf = "CPF é obrigatório";
+        } else if (!/^\d{11}$/.test(dadosPessoais.cpf)) {
+            novosErros.cpf = "CPF deve conter exatamente 11 números";
+        }
 
         setErro(novosErros);
 
@@ -86,6 +102,7 @@ export default function DadosPessoais() {
 
     return (
         <div className="form-page">
+
             <div className="layout">
                 <Sidebar2
                     titulo="Dados Pessoais"
@@ -123,7 +140,9 @@ export default function DadosPessoais() {
                                 type="text"
                                 value={dadosPessoais.cpf}
                                 onChange={alterarValor}
-                                placeholder="Digite seu CPF"
+                                placeholder="Digite seu CPF (apenas números)"
+                                maxLength={11}
+                                inputMode="numeric"
                             />
                             {erros.cpf && <p className="form-error">{erros.cpf}</p>}
 
@@ -176,6 +195,7 @@ export default function DadosPessoais() {
                             </div>
                         </form>
                     </div>
+                    <AssistenteIA />
                 </div>
 
             </div>

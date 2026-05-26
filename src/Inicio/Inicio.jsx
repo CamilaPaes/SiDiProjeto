@@ -99,6 +99,7 @@ export default function Inicio() {
                     icone={<Settings />}
                     perfil="Administrador"
                     seta={<ArrowRight size={18} />}
+                    to="/Administrador"
                 />
 
             </section>

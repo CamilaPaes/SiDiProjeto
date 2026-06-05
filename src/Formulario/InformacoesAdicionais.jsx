@@ -107,7 +107,7 @@ export default function InformacoesAdicionais() {
                                 <option value="">Selecione o tipo</option>
                                 <option value="visitante">Visitante</option>
                                 <option value="fornecedor">Fornecedor</option>
-                                <option value="prestador">Prestador de serviço</option>
+                                <option value="prestador_servico">Prestador de serviço</option>
                                 <option value="entrevista">Entrevista</option>
                             </select>
 

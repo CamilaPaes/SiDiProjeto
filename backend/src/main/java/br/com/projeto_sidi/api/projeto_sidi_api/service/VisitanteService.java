@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import br.com.projeto_sidi.api.projeto_sidi_api.enums.Setor;
 
-
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,12 +47,12 @@ public class VisitanteService {
         return converterParaDTO(visitante);
     }
 
-   public List<VisitanteDTO> listarPorSetor(Setor setor) {
-    return visitanteRepository.findBySetor(setor)
-        .stream()
-        .map(this::converterParaDTO)
-        .collect(Collectors.toList());
-}
+    public List<VisitanteDTO> listarPorSetor(Setor setor) {
+        return visitanteRepository.findBySetor(setor)
+                .stream()
+                .map(this::converterParaDTO)
+                .collect(Collectors.toList());
+    }
 
     public List<VisitanteDTO> listarPendentes() {
         return visitanteRepository.findByStatus(StatusCadastro.PENDENTE)

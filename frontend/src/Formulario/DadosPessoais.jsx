@@ -37,6 +37,24 @@ export default function DadosPessoais() {
             }
         }
 
+        if (nomeCampo === "telefone") {
+
+            // remove tudo que não for número
+            valor = valor.replace(/\D/g, "");
+
+            // limita a 11 números
+            valor = valor.slice(0, 11);
+
+            // aplica máscara
+            valor = valor.replace(
+                /^(\d{2})(\d{5})(\d{0,4})$/,
+                "($1) $2-$3"
+            );
+
+            // remove traço sobrando
+            valor = valor.replace(/-$/, "");
+        }
+
         setDadosPessoais({
             ...dadosPessoais,
             [nomeCampo]: valor
@@ -62,8 +80,13 @@ export default function DadosPessoais() {
         if (!dadosPessoais.nome) novosErros.nome = "Nome é obrigatório";
         if (!dadosPessoais.email) novosErros.email = "Email é obrigatório";
         if (!dadosPessoais.empresa) novosErros.empresa = "Empresa é obrigatória";
-        if (!dadosPessoais.cpf) novosErros.cpf = "CPF é obrigatório";
-        if (!dadosPessoais.telefone) novosErros.telefone = "Telefone é obrigatório";
+
+
+        if (!dadosPessoais.telefone) {
+            novosErros.telefone = "Telefone é obrigatório";
+        } else if (!/^\(\d{2}\)\s\d{5}-\d{4}$/.test(dadosPessoais.telefone)) {
+            novosErros.telefone = "Telefone inválido";
+        }
 
         // Validação específica do CPF
         if (!dadosPessoais.cpf) {
@@ -152,7 +175,9 @@ export default function DadosPessoais() {
                                 type="text"
                                 value={dadosPessoais.telefone}
                                 onChange={alterarValor}
-                                placeholder="Digite seu telefone"
+                                placeholder="(81) 96633-8816"
+                                maxLength={15}
+                                inputMode="numeric"
                             />
                             {erros.telefone && <p className="form-error">{erros.telefone}</p>}
 

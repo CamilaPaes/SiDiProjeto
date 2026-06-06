@@ -29,24 +29,15 @@ bash
 mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS projeto_sidi_db;"
 
 3. Configurar o banco e a chave da IA
-Edite src/main/resources/application.properties:
+O `application.properties` já está configurado para ler a chave da Gemini da variável de ambiente `GEMINI_API_KEY` (`gemini.api.key=${GEMINI_API_KEY:}`). Os parâmetros do banco usam os valores padrão abaixo, ajustáveis no arquivo se necessário.
 
-Propriedade	Valor	Descrição
+Propriedade	Valor padrão	Descrição
 spring.datasource.url	jdbc:mysql://localhost:3306/projeto_sidi_db	URL do banco
 spring.datasource.username	root	Usuário do MySQL
 spring.datasource.password	root	Senha do MySQL
-gemini.api.key	AIzaSy...	Chave da API Gemini
-properties
-spring.application.name=projeto-sidi-api
-spring.jpa.hibernate.ddl-auto=update
-spring.datasource.url=jdbc:mysql://localhost:3306/projeto_sidi_db
-spring.datasource.username=root
-spring.datasource.password=root
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+gemini.api.key	${GEMINI_API_KEY:}	Lida do ambiente — nunca commite a chave no arquivo
 
-# ⚠️ OBRIGATÓRIO: Adicione sua chave da API Gemini
-
-gemini.api.key=AIzaSySUA-CHAVE-AQUI
+⚠️ **Nunca** escreva o valor da chave no `application.properties` ou em qualquer arquivo versionado. Defina sempre via variável de ambiente.
 
 4. Obter a chave da API Gemini (IA)
 Passo	Ação
@@ -54,14 +45,22 @@ Passo	Ação
 2	Faça login com sua conta Google
 3	Clique em "Create API Key"
 4	Copie a chave gerada (começa com AIzaSy)
-5	Cole no campo gemini.api.key do application.properties
+5	Defina a variável de ambiente `GEMINI_API_KEY` antes de rodar a aplicação (ver passo 5) ou use o `.env` na raiz do repositório quando subir via `docker compose`
 Importante: Sem a chave, o assistente virtual não funcionará. A chave é gratuita.
 
 5. Compilar e executar
+Antes de rodar, exporte a chave da Gemini no shell (ou configure-a nas variáveis de ambiente da sua IDE):
+
+```bash
+export GEMINI_API_KEY=sua_chave_aqui
+```
+
 Comando	Descrição
 mvn clean compile	Compilar o projeto
 mvn spring-boot:run	Executar a aplicação
 A API estará disponível em: http://localhost:8080
+
+> Spring Boot não lê o arquivo `.env` automaticamente. Para execução local, use `export` (ou a aba *Environment Variables* da sua IDE). O `.env` da raiz só é consumido automaticamente pelo `docker compose`.
 
 🤖 Assistente Virtual (IA)
 O sistema possui um assistente virtual integrado que auxilia no preenchimento do formulário de pré-cadastro.

@@ -51,13 +51,19 @@ git clone <url-do-repositorio>
 cd SiDiProjeto
 ```
 
-### 2. Configurar a chave da API Gemini (opcional)
+### 2. Configurar a chave da API Gemini (obrigatório)
 
-O `docker-compose.yml` já possui uma chave padrão, mas o recomendado é definir a sua própria criando um arquivo `.env` na raiz do projeto:
+Copie o template `.env.example` para `.env` na raiz do projeto e preencha com a sua chave:
+
+```bash
+cp .env.example .env
+```
 
 ```env
 GEMINI_API_KEY=SUA_CHAVE_AQUI
 ```
+
+> ⚠️ O arquivo `.env` está no `.gitignore` — **nunca** o commite. Use apenas o `.env.example` (sem valores) como referência.
 
 Para obter uma chave gratuita:
 
@@ -66,7 +72,7 @@ Para obter uma chave gratuita:
 3. Clique em **Create API Key**
 4. Copie a chave gerada (inicia com `AIzaSy`)
 
-> Sem uma chave válida, o assistente virtual de IA não funcionará. O restante do sistema continua operando normalmente.
+> Sem a variável `GEMINI_API_KEY` definida, o `docker compose up` falhará com uma mensagem clara. Para rodar o sistema sem a IA, exporte `GEMINI_API_KEY=` (vazio) — o restante da aplicação continua funcionando, apenas o assistente virtual ficará indisponível.
 
 ### 3. Subir os contêineres
 
@@ -142,7 +148,7 @@ Configuradas no `docker-compose.yml`. Podem ser sobrescritas por um arquivo `.en
 | `SPRING_DATASOURCE_URL` | `jdbc:mysql://db:3306/projeto_sidi_db` | URL de conexão com o banco |
 | `SPRING_DATASOURCE_USERNAME` | `root` | Usuário do banco |
 | `SPRING_DATASOURCE_PASSWORD` | `root` | Senha do banco |
-| `GEMINI_API_KEY` | *(chave de exemplo)* | Chave da API Gemini para o assistente virtual |
+| `GEMINI_API_KEY` | *(obrigatória, via `.env`)* | Chave da API Gemini para o assistente virtual |
 
 ---
 
@@ -161,8 +167,11 @@ As imagens são construídas uma única vez. Após modificar o código, rode:
 docker compose up --build
 ```
 
-**Erro de chave Gemini inválida**
-Defina uma chave válida via `.env` conforme descrito acima. O restante da aplicação continuará funcionando, apenas o assistente virtual ficará indisponível.
+**`GEMINI_API_KEY is required` ao subir os contêineres**
+Crie o arquivo `.env` na raiz com `GEMINI_API_KEY=sua_chave` (ver passo 2). Para rodar sem IA, basta exportar `GEMINI_API_KEY=` (vazio).
+
+**Erro de chave Gemini inválida em tempo de execução**
+A chave foi aceita pelo Compose mas é rejeitada pela API do Google. Gere uma nova em [aistudio.google.com/apikey](https://aistudio.google.com/apikey) e atualize o `.env`.
 
 ---
 

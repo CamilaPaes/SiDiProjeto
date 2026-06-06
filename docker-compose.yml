@@ -24,7 +24,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/projeto_sidi_db
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
-      GEMINI_API_KEY: ${GEMINI_API_KEY:-AIzaSyDUb4zdV2M_A0CDY9G1ZprzWZEsomLvYis}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:?GEMINI_API_KEY is required (define it in .env)}
     depends_on:
       db:
         condition: service_healthy
